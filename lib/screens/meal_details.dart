@@ -7,11 +7,13 @@ class MealDetailsScreen extends StatelessWidget {
   const MealDetailsScreen({
     super.key,
     required this.meal,
+    required this.onToggleFavorite,
     // required this.title,
     // required this.imageUrl,
   });
 
   final Meal meal;
+  final void Function(Meal meal) onToggleFavorite;
 
   // final String title;
   // final String imageUrl;
@@ -72,7 +74,17 @@ class MealDetailsScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(meal.title)),
+      appBar: AppBar(
+        title: Text(meal.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onToggleFavorite(meal);
+            },
+            icon: const Icon(Icons.favorite),
+          ),
+        ],
+      ),
       body: body,
     );
   }
